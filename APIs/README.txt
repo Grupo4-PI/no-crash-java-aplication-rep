@@ -1,1 +1,0 @@
-Aqui está nossos códigos em Java para se fazer a inserção dos dados dos recursos da máquina no Banco de Dados 

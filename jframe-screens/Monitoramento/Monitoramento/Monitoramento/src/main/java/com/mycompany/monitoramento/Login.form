@@ -85,8 +85,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="180" max="32767" attributes="0"/>
-                  <Component id="introductionContainer" min="-2" pref="248" max="-2" attributes="0"/>
+                  <EmptySpace pref="428" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,9 +105,8 @@
                       <Component id="limparLogin" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="btnLogin" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="261" max="32767" attributes="0"/>
               </Group>
-              <Component id="introductionContainer" pref="464" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -197,14 +195,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limparLoginActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="introductionContainer">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/introductionContainer.jpg"/>
-            </Property>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
