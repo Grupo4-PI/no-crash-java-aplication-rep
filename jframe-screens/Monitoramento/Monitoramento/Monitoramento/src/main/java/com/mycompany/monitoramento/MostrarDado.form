@@ -24,74 +24,29 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="mostrarMemoria" max="32767" attributes="0"/>
-                          <Component id="mostrarDisco" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
-                      <Component id="mostrarSistemaOperacional" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="mostrarProcessador" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace pref="177" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+              <Component id="mostrarTudo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="191" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-              <Component id="mostrarSistemaOperacional" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="mostrarProcessador" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="mostrarDisco" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="mostrarMemoria" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
+              <Component id="mostrarTudo" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="121" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="mostrarSistemaOperacional">
+    <Component class="javax.swing.JButton" name="mostrarTudo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SO"/>
+        <Property name="text" type="java.lang.String" value="Dados"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mostrarSistemaOperacionalActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="mostrarProcessador">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Processador"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mostrarProcessadorActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="mostrarDisco">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Disco"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mostrarDiscoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="mostrarMemoria">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Memoria"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mostrarMemoriaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mostrarTudoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

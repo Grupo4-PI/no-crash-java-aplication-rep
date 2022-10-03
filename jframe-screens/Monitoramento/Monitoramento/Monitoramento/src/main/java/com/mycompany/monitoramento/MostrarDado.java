@@ -43,38 +43,14 @@ public class MostrarDado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mostrarSistemaOperacional = new javax.swing.JButton();
-        mostrarProcessador = new javax.swing.JButton();
-        mostrarDisco = new javax.swing.JButton();
-        mostrarMemoria = new javax.swing.JButton();
+        mostrarTudo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        mostrarSistemaOperacional.setText("SO");
-        mostrarSistemaOperacional.addActionListener(new java.awt.event.ActionListener() {
+        mostrarTudo.setText("Dados");
+        mostrarTudo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostrarSistemaOperacionalActionPerformed(evt);
-            }
-        });
-
-        mostrarProcessador.setText("Processador");
-        mostrarProcessador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostrarProcessadorActionPerformed(evt);
-            }
-        });
-
-        mostrarDisco.setText("Disco");
-        mostrarDisco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostrarDiscoActionPerformed(evt);
-            }
-        });
-
-        mostrarMemoria.setText("Memoria");
-        mostrarMemoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostrarMemoriaActionPerformed(evt);
+                mostrarTudoActionPerformed(evt);
             }
         });
 
@@ -83,138 +59,45 @@ public class MostrarDado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(mostrarMemoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mostrarDisco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(mostrarSistemaOperacional))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(mostrarProcessador)))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addGap(137, 137, 137)
+                .addComponent(mostrarTudo)
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(mostrarSistemaOperacional)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mostrarProcessador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mostrarDisco)
-                .addGap(12, 12, 12)
-                .addComponent(mostrarMemoria)
+                .addGap(157, 157, 157)
+                .addComponent(mostrarTudo)
                 .addContainerGap(121, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mostrarSistemaOperacionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSistemaOperacionalActionPerformed
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false","aluno","sptech");
-            
-            Looca looca = new Looca();
-            Integer arquitetura = looca.getSistema().getArquitetura();
-            String fabricante = looca.getSistema().getFabricante();
-            Instant inicializado = looca.getSistema().getInicializado();
-            Boolean permissao = looca.getSistema().getPermissao();
-            Long tempoEmAtividade = looca.getSistema().getTempoDeAtividade();
-            String sistemaOperacional = looca.getSistema().getSistemaOperacional();
-             
-            
-            Statement stm = con.createStatement();
-            stm.execute("INSERT INTO `sistema` "
-                    + "(`arquiteturaBD`, `frabricanteBD`,`inicializadoBD`, `permissaoBD`, `tempoEmAtividadeBD`, `sistemaOperacionalBD`)"
-                    + "VALUES ('"+arquitetura+"','"+fabricante+"','"+inicializado+"','"+permissao+"','"+tempoEmAtividade+"','"+sistemaOperacional+"')");
-            
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_mostrarSistemaOperacionalActionPerformed
-
-    private void mostrarProcessadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarProcessadorActionPerformed
-        // TODO add your handling code here:
-        
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false","aluno","sptech");
-            
-            Looca looca = new Looca();
-            String nomeProcessador = looca.getProcessador().getNome();
-            String fabricante = looca.getProcessador().getFabricante();
-            Long frequencia = looca.getProcessador().getFrequencia();
-            String idMaquina = looca.getProcessador().getId();
-            String identificador = looca.getProcessador().getIdentificador();
-            Integer cpuFisica = looca.getProcessador().getNumeroCpusFisicas();
-            Integer cpuLogica = looca.getProcessador().getNumeroCpusLogicas();
-            Integer pacoteFisico = looca.getProcessador().getNumeroPacotesFisicos();
-            String micro = looca.getProcessador().getMicroarquitetura();
-            Double uso = looca.getProcessador().getUso();
-             
-            
-            Statement stm = con.createStatement();
-            stm.execute("INSERT INTO `processador`(`nomeProcessadorBD`, `frabricanteBD`,`frequenciaBd`, `idMaquinaBD`, `identificadorBD`, `cpuFisicaBD`, `cpuLogicaBD`, `pacoteFisicoBD`, `microBD`, `usoBD`)VALUES ('"+nomeProcessador+"','"+fabricante+"','"+frequencia+"','"+idMaquina+"','"+identificador+"','"+cpuFisica+"','"+cpuLogica+"','"+pacoteFisico+"','"+micro+"','"+uso+"')");
-            
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
-        }                                                         
-    }//GEN-LAST:event_mostrarProcessadorActionPerformed
-
-    private void mostrarMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarMemoriaActionPerformed
+    private void mostrarTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTudoActionPerformed
         // TODO add your handling code here:
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false","aluno","sptech");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false","root","041096");
             
             Looca looca = new Looca();
             Long disponivel = looca.getMemoria().getDisponivel();
             Long emUso = looca.getMemoria().getEmUso();
             Long total = looca.getMemoria().getTotal();
-
-    
-
-
-
-             
-            
-            Statement stm = con.createStatement();
-            stm.execute("INSERT INTO `memoria`(`disponivelBD`, `emUsoBD`,`totalBD`)VALUES ('"+disponivel+"','"+emUso+"','"+total+"')");
-            
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_mostrarMemoriaActionPerformed
-
-    private void mostrarDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarDiscoActionPerformed
-        // TODO add your handling code here:
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false","aluno","sptech");
-            
-            Looca looca = new Looca();
-            Integer qtdDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
-            List<Disco> discoAtual = looca.getGrupoDeDiscos().getDiscos();
-            Integer qtdVolume = looca.getGrupoDeDiscos().getQuantidadeDeVolumes();
-           // Long tamanhoTotal = looca.getGrupoDeDiscos().getTamanhoTotal();
-            List<Volume> volume = looca.getGrupoDeDiscos().getVolumes();
-
+            Integer qtdDiscoJ = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
+            Integer qtdDiscoVolumeJ = looca.getGrupoDeDiscos().getQuantidadeDeVolumes();
+            Double usop = looca.getProcessador().getUso();
 
 
              
             
             Statement stm = con.createStatement();
-            stm.execute("INSERT INTO `disco`(`qtdDiscoBD`, `discoAtualBD`,`qtdVolumeBD`,`volumeBD`)VALUES ('"+qtdDisco+"','"+discoAtual+"','"+qtdVolume+"','"+volume+"')");
+            stm.execute("INSERT INTO `dado`(`memoriaDisponivel`, `memoriaEmUso`,`memoriaTotal`,`qtdDisco`,`qtdVolumeDisco`,`usoProcessador`)VALUES ('"+disponivel+"','"+emUso+"','"+total+"','"+qtdDiscoJ+"','"+qtdDiscoVolumeJ+"','"+usop+"')");
             
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mostrarDiscoActionPerformed
+    }//GEN-LAST:event_mostrarTudoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,9 +137,6 @@ public class MostrarDado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton mostrarDisco;
-    private javax.swing.JButton mostrarMemoria;
-    private javax.swing.JButton mostrarProcessador;
-    private javax.swing.JButton mostrarSistemaOperacional;
+    private javax.swing.JButton mostrarTudo;
     // End of variables declaration//GEN-END:variables
 }

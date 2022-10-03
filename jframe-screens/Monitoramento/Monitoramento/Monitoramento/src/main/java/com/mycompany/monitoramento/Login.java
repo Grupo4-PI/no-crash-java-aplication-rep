@@ -4,6 +4,9 @@
  */
 package com.mycompany.monitoramento;
 
+import com.github.britooo.looca.api.core.Looca;
+import com.github.britooo.looca.api.group.discos.Disco;
+import com.github.britooo.looca.api.group.discos.Volume;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -16,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.List;
 
 /**
  *
@@ -273,19 +277,46 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = textLogin.getText();
         String senha = passwordLogin.getText();
+        Looca looca = new Looca();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false", "aluno", "sptech");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false", "root", "041096");
 
             Statement stm = con.createStatement();
-
-            String sql = "select * from login where username='" + username + "' and senha='" + senha + "'";
-            ResultSet rs = stm.executeQuery(sql);
+           
+            
+            String sqlSelect = "select username, senha from login where username='" + username + "' and '" +senha+ "'";
+          
+            ResultSet rs = stm.executeQuery(sqlSelect);
+            
             if (rs.next()) {
                 //se o nome e a senha for true, passa pra home
                 dispose();
                 MostrarDado page = new MostrarDado();
                 page.show();
+               
+                String nomeProcessador = looca.getProcessador().getNome();
+                String fabricante = looca.getProcessador().getFabricante();
+                Long frequencia = looca.getProcessador().getFrequencia();
+                String idMaquina = looca.getProcessador().getId();
+                String identificador = looca.getProcessador().getIdentificador();
+                Integer cpuFisica = looca.getProcessador().getNumeroCpusFisicas();
+                Integer cpuLogica = looca.getProcessador().getNumeroCpusLogicas();
+                Integer pacoteFisico = looca.getProcessador().getNumeroPacotesFisicos();
+                String micro = looca.getProcessador().getMicroarquitetura();
+                
+
+                List<Disco> discoAtual = looca.getGrupoDeDiscos().getDiscos();
+                List<Volume> volume = looca.getGrupoDeDiscos().getVolumes();
+              
+           String aoba;
+                aoba = "select idLogin from login where username='" + username + "'";
+           stm.execute(aoba);
+                
+               String teste = aoba;
+               System.out.println(teste);
+                String sqlInsert = "INSERT INTO `hardware`(`nomeProcessadorBD`, `frabricanteBD`,`frequenciaBd`, `idMaquinaBD`, `identificadorBD`, `cpuFisicaBD`, `cpuLogicaBD`, `pacoteFisicoBD`, `microBD`,`discoAtualBD`,`volumeBD`,`fklogin`) VALUES ('" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + idMaquina + "','" + identificador + "','" + cpuFisica + "','" + cpuLogica + "','" + pacoteFisico + "','" + micro + "','" + discoAtual + "','" + volume + "','" + 1 + "')";
+                stm.execute(sqlInsert);
             } else {
                 JOptionPane.showMessageDialog(this, "nome ou senha incorretas..");
                 textLogin.setText("");
