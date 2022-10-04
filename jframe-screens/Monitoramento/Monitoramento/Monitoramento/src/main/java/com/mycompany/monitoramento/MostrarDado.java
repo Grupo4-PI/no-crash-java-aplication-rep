@@ -32,6 +32,7 @@ public class MostrarDado extends javax.swing.JFrame {
      */
     public MostrarDado() {
         initComponents();
+        
     }
 
     /**
@@ -78,7 +79,7 @@ public class MostrarDado extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false","root","041096");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false","aluno","sptech");
             
             Looca looca = new Looca();
             Long disponivel = looca.getMemoria().getDisponivel();
@@ -87,12 +88,12 @@ public class MostrarDado extends javax.swing.JFrame {
             Integer qtdDiscoJ = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
             Integer qtdDiscoVolumeJ = looca.getGrupoDeDiscos().getQuantidadeDeVolumes();
             Double usop = looca.getProcessador().getUso();
-
+        String idMaquina = looca.getProcessador().getId();
 
              
             
             Statement stm = con.createStatement();
-            stm.execute("INSERT INTO `dado`(`memoriaDisponivel`, `memoriaEmUso`,`memoriaTotal`,`qtdDisco`,`qtdVolumeDisco`,`usoProcessador`)VALUES ('"+disponivel+"','"+emUso+"','"+total+"','"+qtdDiscoJ+"','"+qtdDiscoVolumeJ+"','"+usop+"')");
+            stm.execute("INSERT INTO `dado`(`memoriaDisponivel`, `memoriaEmUso`,`memoriaTotal`,`qtdDisco`,`qtdVolumeDisco`,`usoProcessador`,`fkHardware`) VALUES ('"+disponivel+"','"+emUso+"','"+total+"','"+qtdDiscoJ+"','"+qtdDiscoVolumeJ+"','"+usop+"','"+idMaquina+"')");
             
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
