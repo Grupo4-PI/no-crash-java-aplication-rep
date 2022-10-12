@@ -19,7 +19,10 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.time.Instant;
 import java.util.List;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -243,49 +246,29 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        String username = textLogin.getText();
+        String emailUsuario = textLogin.getText();
         String senha = passwordLogin.getText();
+        
         Looca looca = new Looca();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?allowPublicKeyRetrieval=true&useSSL=false", "aluno", "sptech");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/NoCrash?allowPublicKeyRetrieval=true&useSSL=false", "root", "041096");
 
             Statement stm = con.createStatement();
            
             
-            String sqlSelect = "select username, senha from login where username='" + username + "' and '" +senha+ "'";
-          
+            String sqlSelect = "select emailUsuario, senha from Usuario where emailUsuario='" + emailUsuario + "' and '" +senha+ "'";
+         
             ResultSet rs = stm.executeQuery(sqlSelect);
             
             if (rs.next()) {
                 //se o nome e a senha for true, passa pra home
                 dispose();
-                MostrarDado page = new MostrarDado();
+                Token page = new Token();
                 page.show();
                
-                String nomeProcessador = looca.getProcessador().getNome();
-                String fabricante = looca.getProcessador().getFabricante();
-                Long frequencia = looca.getProcessador().getFrequencia();
-                String idMaquina = looca.getProcessador().getId();
-                String identificador = looca.getProcessador().getIdentificador();
-                Integer cpuFisica = looca.getProcessador().getNumeroCpusFisicas();
-                Integer cpuLogica = looca.getProcessador().getNumeroCpusLogicas();
-                Integer pacoteFisico = looca.getProcessador().getNumeroPacotesFisicos();
-                String micro = looca.getProcessador().getMicroarquitetura();
                 
-
-                List<Disco> discoAtual = looca.getGrupoDeDiscos().getDiscos();
-                List<Volume> volume = looca.getGrupoDeDiscos().getVolumes();
-              
-           String aoba;
-                aoba = "select idLogin from login where username='" + username + "'";
-           stm.execute(aoba);
-                
-               String teste = aoba;
-               System.out.println(teste);
-                String sqlInsert = "INSERT INTO `hardware`(`idHardware`,`nomeProcessadorBD`, `frabricanteBD`,`frequenciaBd`, `identificadorBD`, `cpuFisicaBD`, `cpuLogicaBD`, `pacoteFisicoBD`, `microBD`,`discoAtualBD`,`volumeBD`,`fklogin`) VALUES ('" + idMaquina + "','" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + identificador + "','" + cpuFisica + "','" + cpuLogica + "','" + pacoteFisico + "','" + micro + "','" + discoAtual + "','" + volume + "','" + 1 + "')";
-                
-                stm.execute(sqlInsert);
+            
             } else {
                 JOptionPane.showMessageDialog(this, "nome ou senha incorretas..");
                 textLogin.setText("");
@@ -293,7 +276,7 @@ public class Login extends javax.swing.JFrame {
             }
             con.close();
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
-            if (username.length() == 0 || senha.length() == 0) {
+            if (emailUsuario.length() == 0 || senha.length() == 0) {
                 outputLogin.setText("Preencha todos os campos...");
             } else {
                 outputLogin.setText("Usuário ou senha incorretos...");
@@ -301,6 +284,22 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    public JPasswordField getPasswordLogin() {
+        return passwordLogin;
+    }
+
+    public void setPasswordLogin(JPasswordField passwordLogin) {
+        this.passwordLogin = passwordLogin;
+    }
+
+    public JTextField getTextLogin() {
+        return textLogin;
+    }
+
+    public void setTextLogin(JTextField textLogin) {
+        this.textLogin = textLogin;
+    }
 
     private void passwordLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordLoginActionPerformed
         // TODO add your handling code here:
