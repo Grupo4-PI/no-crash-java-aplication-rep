@@ -102,7 +102,7 @@ public class Token extends javax.swing.JFrame {
         Looca looca = new Looca();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/NoCrash?allowPublicKeyRetrieval=true&useSSL=false", "root", "041096");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/NoCrash?allowPublicKeyRetrieval=true&useSSL=false", "aluno", "sptech");
 
             Statement stm = con.createStatement();
                        
@@ -126,7 +126,7 @@ public class Token extends javax.swing.JFrame {
                 
                
               
-                 String sqlInsert = "INSERT INTO `hardware`(`idHardware`,`nomeProcessadorBD`, `frabricanteBD`,`frequenciaBd`,`memoriaTotal`,`fkDesktop`) VALUES ('" + idMaquina + "','" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + memoriaTotal + "', '" + token + "')";
+                 String sqlInsert = "INSERT INTO `hardware`(`idHardware`,`nomeProcessador`, `fabricante`,`frequencia`,`memoriaTotal`,`fkDesktop`) VALUES ('" + idMaquina + "','" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + memoriaTotal + "', '" + token + "')";
                 
                 stm.execute(sqlInsert);
             } else {

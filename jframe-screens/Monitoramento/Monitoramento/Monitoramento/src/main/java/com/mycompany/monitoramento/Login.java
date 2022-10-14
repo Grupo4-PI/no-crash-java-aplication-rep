@@ -252,7 +252,7 @@ public class Login extends javax.swing.JFrame {
         Looca looca = new Looca();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/NoCrash?allowPublicKeyRetrieval=true&useSSL=false", "root", "041096");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/NoCrash?allowPublicKeyRetrieval=true&useSSL=false", "aluno", "sptech");
 
             Statement stm = con.createStatement();
            
