@@ -7,8 +7,8 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11.0.16</maven.compiler.source>
-        <maven.compiler.target>11.0.16</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <exec.mainClass>com.mycompany.monitoramento.Monitoramento</exec.mainClass>
      
     </properties>
@@ -19,6 +19,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.27</version>
         </dependency>
+        
+        <dependency>
+    <groupId>com.microsoft.sqlserver</groupId>
+    <artifactId>mssql-jdbc</artifactId>
+    <version>11.2.0.jre11</version>
+</dependency>
         
         <!-- https://mvnrepository.com/artifact/com.github.britooo/looca-api -->
         <dependency>

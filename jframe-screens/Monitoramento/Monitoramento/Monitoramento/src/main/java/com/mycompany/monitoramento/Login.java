@@ -251,13 +251,14 @@ public class Login extends javax.swing.JFrame {
         
         Looca looca = new Looca();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/NoCrash?allowPublicKeyRetrieval=true&useSSL=false", "aluno", "sptech");
+             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=nocrash;encrypt=true;trustServerCertificate=false","nocrash","#Gfgrupo4");
 
             Statement stm = con.createStatement();
            
             
-            String sqlSelect = "select emailUsuario, senha from Usuario where emailUsuario='" + emailUsuario + "' and '" +senha+ "'";
+            String sqlSelect = "select emailUsuario, senha from Usuario where emailUsuario='" + emailUsuario + "' and '" + senha + "'";
          
             ResultSet rs = stm.executeQuery(sqlSelect);
             

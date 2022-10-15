@@ -78,8 +78,9 @@ public class MostrarDado extends javax.swing.JFrame {
     private void mostrarTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTudoActionPerformed
         // TODO add your handling code here:
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/noCrash?allowPublicKeyRetrieval=true&useSSL=false","aluno","sptech");
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false","nocrash","#Gfgrupo4");
             
             Looca looca = new Looca();
            
