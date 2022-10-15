@@ -94,7 +94,7 @@ public class MostrarDado extends javax.swing.JFrame {
              
             
             Statement stm = con.createStatement();
-            stm.execute("INSERT INTO `dado`( `memoriaDisponivel`,`qtdDisco`,`qtdVolumeDisco`,`usoProcessador`,`fkHardware`) VALUES ('"+emUso+"','"+qtdDiscoJ+"','"+qtdVolume+"','"+usop+"','"+idMaquina+"')");
+            stm.execute("INSERT INTO Dado( memoriaDisponivel,qtdDisco,qtdVolumeDisco,usoProcessador,fkHardware) VALUES ('"+emUso+"','"+qtdDiscoJ+"','"+qtdVolume+"','"+usop+"','"+idMaquina+"')");
             
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);

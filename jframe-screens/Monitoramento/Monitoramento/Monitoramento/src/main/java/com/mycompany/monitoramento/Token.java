@@ -107,7 +107,7 @@ public class Token extends javax.swing.JFrame {
 
             Statement stm = con.createStatement();
                        
-            String sqlSelect = "select idDesktop from Desktop where idDesktop = '"+token+"'";
+            String sqlSelect = "select idDesktop from Desktop where idDesktop = '" +token+"'";
          
             ResultSet rs = stm.executeQuery(sqlSelect);
             
@@ -122,12 +122,12 @@ public class Token extends javax.swing.JFrame {
                 String fabricante = looca.getProcessador().getFabricante();
                 Long frequencia = looca.getProcessador().getFrequencia();
                 Long memoriaTotal = looca.getMemoria().getTotal();
-               
+                            List<Disco> discoA = looca.getGrupoDeDiscos().getDiscos();
                 
                 
                
-              
-                 String sqlInsert = "INSERT INTO `hardware`(`idHardware`,`nomeProcessador`, `fabricante`,`frequencia`,`memoriaTotal`,`fkDesktop`) VALUES ('" + idMaquina + "','" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + memoriaTotal + "', '" + token + "')";
+                
+                 String sqlInsert = "INSERT INTO Hardware(idHardware ,nomeProcessador, fabricante, frequencia, discoAtual, memoriaTotal, fkDesktop) VALUES ('"+idMaquina+"','"+nomeProcessador+"','"+fabricante+"','"+frequencia+"','"+discoA+"','"+memoriaTotal+"','"+token+"')";
                 
                 stm.execute(sqlInsert);
             } else {

@@ -258,7 +258,7 @@ public class Login extends javax.swing.JFrame {
             Statement stm = con.createStatement();
            
             
-            String sqlSelect = "select emailUsuario, senha from Usuario where emailUsuario='" + emailUsuario + "' and '" + senha + "'";
+            String sqlSelect = "select emailUsuario, senha from Usuario where emailUsuario='" + emailUsuario + "' and senha ='" + senha + "'";
          
             ResultSet rs = stm.executeQuery(sqlSelect);
             
