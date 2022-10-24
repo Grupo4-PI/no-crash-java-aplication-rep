@@ -25,14 +25,12 @@ import java.util.logging.Logger;
  */
 public class MostrarDado extends javax.swing.JFrame {
 
-
-
     /**
      * Creates new form MostrarDado
      */
     public MostrarDado() {
         initComponents();
-        
+
     }
 
     /**
@@ -85,26 +83,38 @@ public class MostrarDado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mostrarTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTudoActionPerformed
-         // TODO add your handling code here:
+        // TODO add your handling code here:
         try {
-                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false","nocrash","#Gfgrupo4");
-            
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
             Looca looca = new Looca();
-           
-            Long emUso = looca.getMemoria().getDisponivel();
-            
-            Integer qtdDiscoJ = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
-            Integer qtdVolume = looca.getGrupoDeDiscos().getQuantidadeDeVolumes();
-            Double usop = looca.getProcessador().getUso();
-        String idMaquina = looca.getProcessador().getId();
 
-             
+            Long emUso = looca.getMemoria().getDisponivel();
+            Integer qtdDiscoJ = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
+            Double usop = looca.getProcessador().getUso();
+            String idMaquina = looca.getProcessador().getId();
+
+            for (int i = 0; i < qtdDiscoJ; i++) {
+                Disco disco = looca.getGrupoDeDiscos().getDiscos().get(i);
+                String modelo = disco.getModelo();
+                String serial = disco.getSerial();
+                Long bytesEscrita = disco.getBytesDeEscritas();
+                Long bytesLeitura = disco.getBytesDeLeitura();
+                Long escritas = disco.getEscritas();
+                Long leituras = disco.getLeituras();
+                Long tamanho = disco.getTamanho() / 1000000000;
+                Long tamanhoAtualFila = disco.getTamanhoAtualDaFila();
+                Long tempoTransferencia = disco.getTempoDeTransferencia();
+
+                Statement stm = con.createStatement();
+                stm.execute("INSERT INTO Disco (modelo, serial, bytesEscrita, bytesLeitura, escritas, leituras, tamanho, tamanhoAtualFila, tempoTransferencia,  fkHardware) "
+                        + "VALUES ('" + modelo + "','"  + serial + "','"  + bytesEscrita + "','" + bytesLeitura + "','" + escritas + "','" + leituras + "','" + tamanho + "','" + tamanhoAtualFila + "','" + tempoTransferencia + "','" + idMaquina + "')");
+            }
             
             Statement stm = con.createStatement();
-            stm.execute("INSERT INTO Dado( memoriaDisponivel,qtdDisco,qtdVolumeDisco,usoProcessador,fkHardware) VALUES ('"+emUso+"','"+qtdDiscoJ+"','"+qtdVolume+"','"+usop+"','"+idMaquina+"')");
-            
+            stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware) "
+                    + "VALUES ('" + emUso + "','"  + usop + "','" + idMaquina + "')");
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -136,13 +146,10 @@ public class MostrarDado extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MostrarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MostrarDado().setVisible(true);
-               
-                        
             }
         });
     }
