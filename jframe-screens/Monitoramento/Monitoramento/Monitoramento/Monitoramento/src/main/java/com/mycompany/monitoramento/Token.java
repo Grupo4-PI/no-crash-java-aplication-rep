@@ -163,7 +163,7 @@ public class Token extends javax.swing.JFrame {
 
                 stm.execute(sqlInsert);
             } else {
-                JOptionPane.showMessageDialog(this, "token invalido..");
+                JOptionPane.showMessageDialog(this, "Token Inválido!");
                 TokenInserido.setText("");
 
             }

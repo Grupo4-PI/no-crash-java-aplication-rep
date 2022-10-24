@@ -95,17 +95,18 @@ public class MostrarDado extends javax.swing.JFrame {
             String idMaquina = looca.getProcessador().getId();
 
             for (int i = 0; i < qtdDiscoJ; i++) {
+                //os 1000 são testes, precisa fazer a conversão correta
                 Disco disco = looca.getGrupoDeDiscos().getDiscos().get(i);
                 String modelo = disco.getModelo();
                 String serial = disco.getSerial();
-                Long bytesEscrita = disco.getBytesDeEscritas();
-                Long bytesLeitura = disco.getBytesDeLeitura();
-                Long escritas = disco.getEscritas();
-                Long leituras = disco.getLeituras();
+                Long bytesEscrita = disco.getBytesDeEscritas() /1000;
+                Long bytesLeitura = disco.getBytesDeLeitura() / 1000;
+                Long escritas = disco.getEscritas() / 1000;
+                Long leituras = disco.getLeituras()/ 1000;
                 Long tamanho = disco.getTamanho() / 1000000000;
                 Long tamanhoAtualFila = disco.getTamanhoAtualDaFila();
-                Long tempoTransferencia = disco.getTempoDeTransferencia();
-
+                Long tempoTransferencia = disco.getTempoDeTransferencia() / 1000;
+                
                 Statement stm = con.createStatement();
                 stm.execute("INSERT INTO Disco (modelo, serial, bytesEscrita, bytesLeitura, escritas, leituras, tamanho, tamanhoAtualFila, tempoTransferencia,  fkHardware) "
                         + "VALUES ('" + modelo + "','"  + serial + "','"  + bytesEscrita + "','" + bytesLeitura + "','" + escritas + "','" + leituras + "','" + tamanho + "','" + tamanhoAtualFila + "','" + tempoTransferencia + "','" + idMaquina + "')");
@@ -116,6 +117,7 @@ public class MostrarDado extends javax.swing.JFrame {
                     + "VALUES ('" + emUso + "','"  + usop + "','" + idMaquina + "')");
 
         } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
             Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mostrarTudoActionPerformed
