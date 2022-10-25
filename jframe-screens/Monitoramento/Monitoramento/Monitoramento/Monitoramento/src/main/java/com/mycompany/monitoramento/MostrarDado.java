@@ -95,7 +95,10 @@ public class MostrarDado extends javax.swing.JFrame {
             Integer qtdDiscoJ = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
             Double usop = looca.getProcessador().getUso();
             String idMaquina = looca.getProcessador().getId();
-
+            Date horaAtual = new Date();
+            String data = new SimpleDateFormat("dd/MM/yyyy"). format(horaAtual);
+            String hora = new SimpleDateFormat("HH:mm"). format(horaAtual);
+            
             for (int i = 0; i < qtdDiscoJ; i++) {
                 //os 1000 são testes, precisa fazer a conversão correta
                 Disco disco = looca.getGrupoDeDiscos().getDiscos().get(i);
@@ -108,9 +111,6 @@ public class MostrarDado extends javax.swing.JFrame {
                 Long tamanho = disco.getTamanho() / 1000000000;
                 Long tamanhoAtualFila = disco.getTamanhoAtualDaFila();
                 Long tempoTransferencia = disco.getTempoDeTransferencia() / 1000;
-                Date horaAtual = new Date();
-                String data = new SimpleDateFormat("dd/MM/yyyy"). format(horaAtual);
-                String hora = new SimpleDateFormat("HH:mm"). format(horaAtual);
                 System.out.println(bytesLeitura);
                 
                  System.out.println(data);
@@ -120,8 +120,8 @@ public class MostrarDado extends javax.swing.JFrame {
             }
             
             Statement stm = con.createStatement();
-            stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware) "
-                    + "VALUES ('" + emUso + "','"  + usop + "','" + idMaquina + "')");
+            stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware, data_captura, hora) "
+                    + "VALUES ('" + emUso + "','"  + usop + "','" + idMaquina + "','" + data + "','" + hora + "')");
 
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
