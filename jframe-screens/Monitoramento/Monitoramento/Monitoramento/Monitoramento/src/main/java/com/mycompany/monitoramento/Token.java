@@ -156,13 +156,14 @@ public class Token extends javax.swing.JFrame {
                 String fabricante = looca.getProcessador().getFabricante();
                 Long frequencia = looca.getProcessador().getFrequencia();
                 Long memoriaTotal = looca.getMemoria().getTotal();
-                List<Disco> discoA = looca.getGrupoDeDiscos().getDiscos();
+                Integer qntDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
 
-                String sqlInsert = "INSERT INTO Hardware(idHardware ,nomeProcessador, fabricante, frequencia, discoAtual, memoriaTotal, fkDesktop) VALUES ('" + idMaquina + "','" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + discoA + "','" + memoriaTotal + "','" + token + "')";
+                String sqlInsert = "INSERT INTO Hardware(idHardware ,nomeProcessador, fabricante, frequencia, memoriaTotal, qntDisco, fkDesktop) "
+                        + "VALUES ('" + idMaquina + "','" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + memoriaTotal + "','" + qntDisco + "','" + token + "')";
 
                 stm.execute(sqlInsert);
             } else {
-                JOptionPane.showMessageDialog(this, "token invalido..");
+                JOptionPane.showMessageDialog(this, "Token Inválido!");
                 TokenInserido.setText("");
 
             }
