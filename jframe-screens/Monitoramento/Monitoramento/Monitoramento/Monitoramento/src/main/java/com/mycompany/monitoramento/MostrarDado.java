@@ -14,7 +14,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -106,10 +108,15 @@ public class MostrarDado extends javax.swing.JFrame {
                 Long tamanho = disco.getTamanho() / 1000000000;
                 Long tamanhoAtualFila = disco.getTamanhoAtualDaFila();
                 Long tempoTransferencia = disco.getTempoDeTransferencia() / 1000;
+                Date horaAtual = new Date();
+                String data = new SimpleDateFormat("dd/MM/yyyy"). format(horaAtual);
+                String hora = new SimpleDateFormat("HH:mm"). format(horaAtual);
+                System.out.println(bytesLeitura);
                 
+                 System.out.println(data);
                 Statement stm = con.createStatement();
-                stm.execute("INSERT INTO Disco (modelo, serial, bytesEscrita, bytesLeitura, escritas, leituras, tamanho, tamanhoAtualFila, tempoTransferencia,  fkHardware) "
-                        + "VALUES ('" + modelo + "','"  + serial + "','"  + bytesEscrita + "','" + bytesLeitura + "','" + escritas + "','" + leituras + "','" + tamanho + "','" + tamanhoAtualFila + "','" + tempoTransferencia + "','" + idMaquina + "')");
+                stm.execute("INSERT INTO Disco (modelo, serial, bytesEscrita, bytesLeitura, escritas, leituras, tamanho, tamanhoAtualFila, tempoTransferencia,  fkHardware, data_captura, hora) "
+                        + "VALUES ('" + modelo + "','"  + serial + "','"  + bytesEscrita + "','" + bytesLeitura + "','" + escritas + "','" + leituras + "','" + tamanho + "','" + tamanhoAtualFila + "','" + tempoTransferencia + "','" + idMaquina + "','" + data + "','" + hora + "')");
             }
             
             Statement stm = con.createStatement();
