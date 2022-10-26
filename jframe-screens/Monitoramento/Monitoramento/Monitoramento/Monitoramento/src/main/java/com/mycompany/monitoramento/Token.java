@@ -141,7 +141,7 @@ public class Token extends javax.swing.JFrame {
 
             Statement stm = con.createStatement();
 
-            String sqlSelect = "select idDesktop from Desktop where idDesktop = '" +" " + token + "'";
+            String sqlSelect = "select idDesktop from Desktop where idDesktop = '" + token + "'";
 
             ResultSet rs = stm.executeQuery(sqlSelect);
 
@@ -159,7 +159,7 @@ public class Token extends javax.swing.JFrame {
                 Integer qntDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
 
                 String sqlInsert = "INSERT INTO Hardware(idHardware ,nomeProcessador, fabricante, frequencia, memoriaTotal, qntDisco, fkDesktop) "
-                        + "VALUES ('" + idMaquina + "','" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + memoriaTotal + "','" + qntDisco + "','" + " "+ token + "')";
+                        + "VALUES ('" + idMaquina + "','" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + memoriaTotal + "','" + qntDisco + "','" +  token + "')";
 
                 stm.execute(sqlInsert);
             } else {

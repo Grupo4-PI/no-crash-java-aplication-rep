@@ -95,9 +95,6 @@ public class MostrarDado extends javax.swing.JFrame {
             Integer qtdDiscoJ = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
             Double usop = looca.getProcessador().getUso();
             String idMaquina = looca.getProcessador().getId();
-            Date horaAtual = new Date();
-            String data = new SimpleDateFormat("dd/MM/yyyy"). format(horaAtual);
-            String hora = new SimpleDateFormat("HH:mm"). format(horaAtual);
             
             for (int i = 0; i < qtdDiscoJ; i++) {
                 //os 1000 são testes, precisa fazer a conversão correta
@@ -113,15 +110,14 @@ public class MostrarDado extends javax.swing.JFrame {
                 Long tempoTransferencia = disco.getTempoDeTransferencia() / 1000;
                 System.out.println(bytesLeitura);
                 
-                 System.out.println(data);
                 Statement stm = con.createStatement();
-                stm.execute("INSERT INTO Disco (modelo, serial, bytesEscrita, bytesLeitura, escritas, leituras, tamanho, tamanhoAtualFila, tempoTransferencia,  fkHardware, data_captura, hora) "
-                        + "VALUES ('" + modelo + "','"  + serial + "','"  + bytesEscrita + "','" + bytesLeitura + "','" + escritas + "','" + leituras + "','" + tamanho + "','" + tamanhoAtualFila + "','" + tempoTransferencia + "','" + idMaquina + "','" + data + "','" + hora + "')");
+                stm.execute("INSERT INTO Disco (modelo, serial, bytesEscrita, bytesLeitura, escritas, leituras, tamanho, tamanhoAtualFila, tempoTransferencia,  fkHardware) "
+                        + "VALUES ('" + modelo + "','"  + serial + "','"  + bytesEscrita + "','" + bytesLeitura + "','" + escritas + "','" + leituras + "','" + tamanho + "','" + tamanhoAtualFila + "','" + tempoTransferencia + "','" + idMaquina + "')");
             }
             
             Statement stm = con.createStatement();
-            stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware, data_captura, hora) "
-                    + "VALUES ('" + emUso + "','"  + usop + "','" + idMaquina + "','" + data + "','" + hora + "')");
+            stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware) "
+                    + "VALUES ('" + emUso + "','"  + usop + "','" + idMaquina +"')");
 
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
