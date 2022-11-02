@@ -86,21 +86,17 @@ public class MostrarDado extends javax.swing.JFrame {
 
     private void mostrarTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTudoActionPerformed
         // TODO add your handling code here:
+        DbMostrarDado mdado = new DbMostrarDado();
+        Looca looca = new Looca();
+   
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
-            Looca looca = new Looca();
-
-            Long emUso = looca.getMemoria().getDisponivel();
-            Integer qtdDiscoJ = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
-            Double usop = looca.getProcessador().getUso();
-            String idMaquina = looca.getProcessador().getId();
-            Date horaAtual = new Date();
-            String data = new SimpleDateFormat("dd/MM/yyyy"). format(horaAtual);
-            String hora = new SimpleDateFormat("HH:mm"). format(horaAtual);
+              Statement stm = con.createStatement();
             
-            for (int i = 0; i < qtdDiscoJ; i++) {
-                //os 1000 são testes, precisa fazer a conversão correta
+             Integer qtdDiscoJ = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
+             for (int i = 0; i < qtdDiscoJ; i++) {
+   
                 Disco disco = looca.getGrupoDeDiscos().getDiscos().get(i);
                 String modelo = disco.getModelo();
                 String serial = disco.getSerial();
@@ -111,22 +107,22 @@ public class MostrarDado extends javax.swing.JFrame {
                 Long tamanho = disco.getTamanho() / 1000000000;
                 Long tamanhoAtualFila = disco.getTamanhoAtualDaFila();
                 Long tempoTransferencia = disco.getTempoDeTransferencia() / 1000;
-                System.out.println(bytesLeitura);
-                
-                 System.out.println(data);
-                Statement stm = con.createStatement();
-                stm.execute("INSERT INTO Disco (modelo, serial, bytesEscrita, bytesLeitura, escritas, leituras, tamanho, tamanhoAtualFila, tempoTransferencia,  fkHardware, data_captura, hora) "
-                        + "VALUES ('" + modelo + "','"  + serial + "','"  + bytesEscrita + "','" + bytesLeitura + "','" + escritas + "','" + leituras + "','" + tamanho + "','" + tamanhoAtualFila + "','" + tempoTransferencia + "','" + idMaquina + "','" + data + "','" + hora + "')");
-            }
-            
-            Statement stm = con.createStatement();
-            stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware, data_captura, hora) "
-                    + "VALUES ('" + emUso + "','"  + usop + "','" + idMaquina + "','" + data + "','" + hora + "')");
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            ex.printStackTrace();
+                 System.out.println(serial);
+                  stm.execute("INSERT INTO Disco (modelo, serial, bytesEscrita, bytesLeitura, escritas, leituras, tamanho, tamanhoAtualFila, tempoTransferencia,  fkHardware) "
+                        + "VALUES ('" + modelo + "','"  + serial + "','"  + bytesEscrita+ "','" + bytesLeitura+ "','" + escritas + "','" + leituras + "','" + tamanho + "','" + tamanhoAtualFila+ "','" + tempoTransferencia+ "','" + mdado.getIdMaquina() + "')");
+             }
+                 stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware, columnData) "
+                    + "VALUES ('" + mdado.getEmUso() + "','"  + mdado.getUsop()+ "','" + mdado.getIdMaquina() + "','" + mdado.getData() + "')");
+              
+            } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
         }
+           
+            
+           
+            
+
+     
     }//GEN-LAST:event_mostrarTudoActionPerformed
 
     /**

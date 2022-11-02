@@ -4,6 +4,7 @@
  */
 package com.mycompany.monitoramento;
 
+import com.github.britooo.looca.api.core.Looca;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -12,35 +13,76 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * @author guh_a
  */
 public class Database {
-     private JdbcTemplate connection;
+ Looca looca = new Looca();
+ 
+    private String idMaquina = looca.getProcessador().getId();
+     String nomeProcessador = looca.getProcessador().getNome();
+    private String fabricante = looca.getProcessador().getFabricante();
+    private Long frequencia = looca.getProcessador().getFrequencia();
+    private Long memoriaTotal = looca.getMemoria().getTotal();
+    private Integer qntDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
+    
 
+    public Looca getLooca() {
+        return looca;
+    }
 
-  // CONSTRUTOR
+    public void setLooca(Looca looca) {
+        this.looca = looca;
+    }
 
-  public Database() {
+    public String getIdMaquina() {
+        return idMaquina;
+    }
 
+    public void setIdMaquina(String idMaquina) {
+        this.idMaquina = idMaquina;
+    }
 
-    BasicDataSource dataSource = new BasicDataSource();
+    public String getNomeProcessador() {
+        return nomeProcessador;
+    }
 
-    dataSource​.setDriverClassName("com.mysql.cj.jdbc.Driver");
+    public void setNomeProcessador(String nomeProcessador) {
+        this.nomeProcessador = nomeProcessador;
+    }
 
-    dataSource​.setUrl("jdbc:mysql://localhost:3306/NoCrash?allowPublicKeyRetrieval=true&useSSL=false");
+    public String getFabricante() {
+        return fabricante;
+    }
 
-    dataSource​.setUsername("root");
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
+    }
 
-    dataSource​.setPassword("041096");
+    public Long getFrequencia() {
+        return frequencia;
+    }
 
+    public void setFrequencia(Long frequencia) {
+        this.frequencia = frequencia;
+    }
 
-    this.connection = new JdbcTemplate(dataSource);
+    public Long getMemoriaTotal() {
+        return memoriaTotal;
+    }
 
-  }
+    public void setMemoriaTotal(Long memoriaTotal) {
+        this.memoriaTotal = memoriaTotal;
+    }
 
+    public Integer getQntDisco() {
+        return qntDisco;
+    }
 
-  // GETTER
+    public void setQntDisco(Integer qntDisco) {
+        this.qntDisco = qntDisco;
+    }
 
-  public JdbcTemplate getConnection() {
+    public Database() {
+    }
 
-    return connection;
-
-  }
+   
+    
+    
 }

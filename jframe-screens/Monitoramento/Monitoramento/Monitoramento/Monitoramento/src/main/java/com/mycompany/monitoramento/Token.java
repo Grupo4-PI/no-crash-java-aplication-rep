@@ -129,11 +129,8 @@ public class Token extends javax.swing.JFrame {
     private void botaoTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoTokenActionPerformed
         // TODO add your handling code here: String emailUsuario = textLogin.getText();
 
-        Login login = new Login();
-
         String token = TokenInserido.getText();
-
-        Looca looca = new Looca();
+        Database database = new Database();
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
@@ -146,20 +143,12 @@ public class Token extends javax.swing.JFrame {
             ResultSet rs = stm.executeQuery(sqlSelect);
 
             if (rs.next()) {
-                //se o nome e a senha for true, passa pra home
                 dispose();
                 MostrarDado page = new MostrarDado();
                 page.show();
 
-                String idMaquina = looca.getProcessador().getId();
-                String nomeProcessador = looca.getProcessador().getNome();
-                String fabricante = looca.getProcessador().getFabricante();
-                Long frequencia = looca.getProcessador().getFrequencia();
-                Long memoriaTotal = looca.getMemoria().getTotal();
-                Integer qntDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
-
-                String sqlInsert = "INSERT INTO Hardware(idHardware ,nomeProcessador, fabricante, frequencia, memoriaTotal, qntDisco, fkDesktop) "
-                        + "VALUES ('" + idMaquina + "','" + nomeProcessador + "','" + fabricante + "','" + frequencia + "','" + memoriaTotal + "','" + qntDisco + "','" + " "+ token + "')";
+                 String sqlInsert = "INSERT INTO Hardware(idHardware ,nomeProcessador, fabricante, frequencia, memoriaTotal, qntDisco, fkDesktop) "
++ "VALUES ('" + database.getIdMaquina() + "','" + database.getNomeProcessador() + "','" + database.getFabricante() + "','" + database.getFrequencia() + "','" + database.getMemoriaTotal() + "','" + database.getQntDisco() + "','" + " "+ token + "')";
 
                 stm.execute(sqlInsert);
             } else {
