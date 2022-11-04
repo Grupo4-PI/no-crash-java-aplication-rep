@@ -1,27 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.monitoramento;
 
 import com.github.britooo.looca.api.core.Looca;
-import org.apache.commons.dbcp2.BasicDataSource;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-/**
- *
- * @author guh_a
- */
 public class Database {
- Looca looca = new Looca();
- 
+
+    Looca looca = new Looca();
+
     private String idMaquina = looca.getProcessador().getId();
-     String nomeProcessador = looca.getProcessador().getNome();
+    String nomeProcessador = looca.getProcessador().getNome();
     private String fabricante = looca.getProcessador().getFabricante();
     private Long frequencia = looca.getProcessador().getFrequencia();
     private Long memoriaTotal = looca.getMemoria().getTotal();
     private Integer qntDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
-    
 
     public Looca getLooca() {
         return looca;
@@ -78,11 +68,4 @@ public class Database {
     public void setQntDisco(Integer qntDisco) {
         this.qntDisco = qntDisco;
     }
-
-    public Database() {
-    }
-
-   
-    
-    
 }

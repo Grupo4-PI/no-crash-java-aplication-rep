@@ -1,32 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.monitoramento;
 
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.Disco;
 
-/**
- *
- * @author guh_a
- */
 public class DbMostrarDadoDisco {
-                Looca looca = new Looca();
-            
-                
-                private Disco disco = (Disco) looca.getGrupoDeDiscos().getDiscos();
-               private String modelo = disco.getModelo();
-               private String serial = disco.getSerial();
-               private Long bytesEscrita = disco.getBytesDeEscritas() /10000;
-               private Long bytesLeitura = disco.getBytesDeLeitura() / 10000;
-               private Long escritas = disco.getEscritas() / 10000;
-               private Long leituras = disco.getLeituras()/ 10000;
-               private Long tamanho = disco.getTamanho() / 1000000000;
-               private Long tamanhoAtualFila = disco.getTamanhoAtualDaFila();
-                private Long tempoTransferencia = disco.getTempoDeTransferencia() / 1000;
 
-   
+    Looca looca = new Looca();
+
+    private Disco disco = (Disco) looca.getGrupoDeDiscos().getDiscos();
+    private String modelo = disco.getModelo();
+    private String serial = disco.getSerial();
+    private Long bytesEscrita = disco.getBytesDeEscritas() / 10000;
+    private Long bytesLeitura = disco.getBytesDeLeitura() / 10000;
+    private Long escritas = disco.getEscritas() / 10000;
+    private Long leituras = disco.getLeituras() / 10000;
+    private Long tamanho = disco.getTamanho() / 1000000000;
+    private Long tamanhoAtualFila = disco.getTamanhoAtualDaFila();
+    private Long tempoTransferencia = disco.getTempoDeTransferencia() / 1000;
 
     public Disco getDisco() {
         return disco;
@@ -46,7 +36,7 @@ public class DbMostrarDadoDisco {
 
     public String getSerial() {
         return serial;
-        
+
     }
 
     public void setSerial(String serial) {
@@ -108,8 +98,4 @@ public class DbMostrarDadoDisco {
     public void setTempoTransferencia(Long tempoTransferencia) {
         this.tempoTransferencia = tempoTransferencia;
     }
-                
-                
-                    
-    
 }

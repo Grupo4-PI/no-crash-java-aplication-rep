@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.monitoramento;
 
 import com.github.britooo.looca.api.core.Looca;
-import com.github.britooo.looca.api.group.discos.Disco;
-import com.github.britooo.looca.api.group.discos.Volume;
 import java.awt.HeadlessException;
-import java.awt.Toolkit;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,23 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.time.Instant;
-import java.util.List;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-/**
- *
- * @author guh_a
- */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
     public Login() {
         initComponents();
         setResizable(false);
@@ -247,28 +230,20 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String emailUsuario = textLogin.getText();
         String senha = passwordLogin.getText();
-        
+
         Looca looca = new Looca();
         try {
-             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=nocrash;encrypt=true;trustServerCertificate=false","nocrash","#Gfgrupo4");
-
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=nocrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
             Statement stm = con.createStatement();
-           
-            
             String sqlSelect = "select emailUsuario, senha from Usuario where emailUsuario='" + emailUsuario + "' and senha ='" + senha + "'";
-         
             ResultSet rs = stm.executeQuery(sqlSelect);
-            
+
             if (rs.next()) {
                 //se o nome e a senha for true, passa pra home
                 dispose();
                 Token page = new Token();
                 page.show();
-               
-                
-            
             } else {
                 JOptionPane.showMessageDialog(this, "nome ou senha incorretas..");
                 textLogin.setText("");
@@ -305,15 +280,7 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordLoginActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -330,9 +297,7 @@ public class Login extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
