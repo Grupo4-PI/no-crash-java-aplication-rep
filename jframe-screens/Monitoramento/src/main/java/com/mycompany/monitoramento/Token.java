@@ -111,14 +111,11 @@ public class Token extends javax.swing.JFrame {
         Database database = new Database();
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
             Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
-
             Statement stm = con.createStatement();
 
-            String sqlSelect = "select idDesktop from Desktop where idDesktop = '" + " " + token + "'";
-
-            ResultSet rs = stm.executeQuery(sqlSelect);
+            ResultSet rs = stm.executeQuery(
+                    "select idDesktop from Desktop where idDesktop = '" + " " + token + "'");
 
             if (rs.next()) {
                 dispose();
@@ -152,7 +149,6 @@ public class Token extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Token Inválido!");
                 TokenInserido.setText("");
-
             }
             con.close();
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
