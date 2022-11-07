@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.awt.Image;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Token extends javax.swing.JFrame {
 
@@ -106,9 +109,10 @@ public class Token extends javax.swing.JFrame {
 
     private void botaoTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoTokenActionPerformed
         // TODO add your handling code here: String emailUsuario = textLogin.getText();
-
+        DbMostrarDado dbMostrarDado = new DbMostrarDado();
         String token = TokenInserido.getText();
         Database database = new Database();
+        
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
@@ -152,6 +156,24 @@ public class Token extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Token Inválido!");
                 TokenInserido.setText("");
+
+                try {
+                    String txtErro = "Token Inválido! " + dbMostrarDado.getData() + " " + dbMostrarDado.getHora() + "\n";
+                    File file = new File("arquivoSaida.txt");
+
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+     
+                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                    bufferWritter.write(txtErro);
+                    bufferWritter.flush();
+                    bufferWritter.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
             con.close();

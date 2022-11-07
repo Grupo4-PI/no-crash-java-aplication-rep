@@ -2,6 +2,9 @@ package com.mycompany.monitoramento;
 
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.Disco;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -62,7 +65,7 @@ public class MostrarDado extends javax.swing.JFrame {
     private void mostrarTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTudoActionPerformed
         DbMostrarDado mdado = new DbMostrarDado();
         Looca looca = new Looca();
-
+           
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
@@ -87,6 +90,49 @@ public class MostrarDado extends javax.swing.JFrame {
             }
             stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware) "
                     + "VALUES ('" + mdado.getEmUso() + "','" + mdado.getUsop() + "','" + mdado.getIdMaquina() + "')");
+            
+            mdado.setUsop(12.0);
+            if (mdado.getUsop() >= 10.0) {
+            try {
+                System.out.println(mdado.getUsop());
+                String txtErro = "Uso do processador em " + mdado.getUsop() + "%" + mdado.getData() + " " + mdado.getHora() + "\n";
+                File file = new File("arquivoSaida.txt");
+
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                bufferWritter.write(txtErro);
+                bufferWritter.flush();
+                bufferWritter.close();
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+            
+            if (mdado.porcentoMemoria() >= 2.0) {
+                try {
+                System.out.println(mdado.getUsop());
+                String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "%" + mdado.getData() + " " + mdado.getHora() + "\n";
+                File file = new File("arquivoSaida.txt");
+
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                bufferWritter.write(txtErro);
+                bufferWritter.flush();
+                bufferWritter.close();
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            }
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);

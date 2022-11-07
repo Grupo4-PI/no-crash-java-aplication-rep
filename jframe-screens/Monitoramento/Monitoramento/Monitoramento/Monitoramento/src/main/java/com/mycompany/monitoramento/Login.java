@@ -11,6 +11,9 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -228,6 +231,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        DbMostrarDado dbMostrarDado = new DbMostrarDado();
         String emailUsuario = textLogin.getText();
         String senha = passwordLogin.getText();
 
@@ -248,6 +252,29 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "nome ou senha incorretas..");
                 textLogin.setText("");
                 passwordLogin.setText("");
+
+                try {
+                    String txtErro = "Nome ou senha incorretas " + dbMostrarDado.getData() + " " + dbMostrarDado.getHora() + "\n";
+                    File file = new File("arquivoSaida.txt");
+
+                    // Verifica se o arquivo existe
+                    // Se não existir será criado.
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                    // Segundo parâmetro da Classe FileWriter(String, boolean)
+                    // define se é para adicionar conteúdo ao final do arquivo (true)
+                    // senão sobrescreve todo conteúdo do arquivo.
+                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                    bufferWritter.write(txtErro);
+                    bufferWritter.flush();
+                    bufferWritter.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
             con.close();
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
