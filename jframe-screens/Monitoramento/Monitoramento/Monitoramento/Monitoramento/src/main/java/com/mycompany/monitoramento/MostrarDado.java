@@ -95,8 +95,8 @@ public class MostrarDado extends javax.swing.JFrame {
             if (mdado.getUsop() >= 10.0) {
             try {
                 System.out.println(mdado.getUsop());
-                String txtErro = "Uso do processador em " + mdado.getUsop() + "%" + mdado.getData() + " " + mdado.getHora() + "\n";
-                File file = new File("arquivoSaida.txt");
+                String txtErro = "Uso do processador está em " + mdado.getUsop() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";
+                File file = new File("hardware.txt");
 
                 if (!file.exists()) {
                     file.createNewFile();
@@ -116,8 +116,8 @@ public class MostrarDado extends javax.swing.JFrame {
             if (mdado.porcentoMemoria() >= 2.0) {
                 try {
                 System.out.println(mdado.getUsop());
-                String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "%" + mdado.getData() + " " + mdado.getHora() + "\n";
-                File file = new File("arquivoSaida.txt");
+                String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";
+                File file = new File("hardware.txt");
 
                 if (!file.exists()) {
                     file.createNewFile();

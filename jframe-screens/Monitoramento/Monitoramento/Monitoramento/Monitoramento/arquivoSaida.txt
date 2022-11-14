@@ -3,3 +3,4 @@ Token Inválido! 07/11/2022 18:18
 Token Inválido! 07/11/2022 18:20
 Uso do processador em 12.0%07/11/2022 18:22
 Uso da memória está em 3.0%07/11/2022 18:22
+Nome ou senha incorretas 12/11/2022 00:49
