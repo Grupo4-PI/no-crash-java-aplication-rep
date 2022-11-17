@@ -76,7 +76,6 @@ public class DbDado {
         Double emUsoPorcento = ((emUso / 1024.0) / 1024.0) / 1024.0;
         Double memoriaTotalPorcento = ((memoriaTotal / 1024.0) / 1024.0) / 1024.0;
 
-        //return (emUsoPorcento / memoriaTotalPorcento) * 100.0;
-        return 3.0;
+        return (emUsoPorcento / memoriaTotalPorcento) * 100.0;
     }
 }

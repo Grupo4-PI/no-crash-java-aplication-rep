@@ -85,8 +85,7 @@ public class MostrarDado extends javax.swing.JFrame {
             }
             stm.execute(sql.insertDados());
 
-            mdado.setUsop(12.0);
-            if (mdado.getUsop() >= 10.0) {
+            if (mdado.getUsop() >= 70.0) {
                 try {
                     System.out.println(mdado.getUsop());
                     String txtErro = "Uso do processador está em " + mdado.getUsop() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";
@@ -107,7 +106,7 @@ public class MostrarDado extends javax.swing.JFrame {
                 }
             }
 
-            if (mdado.porcentoMemoria() >= 2.0) {
+            if (mdado.porcentoMemoria() >= 70.0) {
                 try {
                     System.out.println(mdado.getUsop());
                     String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";

@@ -1,2 +1,4 @@
 Uso do processador em 12.0%12/11/2022 01:02
 Uso da memória está em 3.0%12/11/2022 01:02
+Uso do processador está em 12.0% 17/11/2022 18:05
+Uso da memória está em 3.0% 17/11/2022 18:05
