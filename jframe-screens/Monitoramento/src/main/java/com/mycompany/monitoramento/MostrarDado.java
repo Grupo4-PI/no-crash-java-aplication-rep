@@ -9,15 +9,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MostrarDado extends javax.swing.JFrame {
 
+    
+private Timer timer;
+    
+    
+
     public MostrarDado() {
         initComponents();
+        this.timer = new Timer("Insert Disco");
+        this.timer.schedule(new DiscoTask(), 1_000, 20_000);
+        
+        this.timer = new Timer("Insert Dados");
+        this.timer.schedule(new DadoTask(), 1_000, 20_000);
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
