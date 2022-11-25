@@ -1,5 +1,0 @@
-Nome ou senha incorretas 12/11/2022 01:00
-Nome ou senha incorretas 12/11/2022 01:01
-Token Inválido! 12/11/2022 01:01
-Nome ou senha incorretas 17/11/2022 18:01
-Token Inválido! 17/11/2022 18:02
