@@ -135,10 +135,17 @@ public class Token extends javax.swing.JFrame {
                 try {
                     DatabaseMySql db = new DatabaseMySql();
                     try {
+                        db.inserirDados();
+                    } catch (Exception e) {
+                    }
+                    try {
                         db.insertHardware(token);
                     } catch (Exception ex) {
                         try {
-                            db.updateHardware(token);
+                            try {
+                                db.updateHardware(token);
+                            } catch (Exception e) {
+                            }
                         } catch (Exception e) {
                         }
                     }

@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class MostrarDado extends javax.swing.JFrame {
 
@@ -77,7 +78,8 @@ public class MostrarDado extends javax.swing.JFrame {
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:"
+                    + "1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
             Statement stm = con.createStatement();
 
             Integer qntDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
@@ -111,63 +113,60 @@ public class MostrarDado extends javax.swing.JFrame {
                     } catch (Exception e) {
                     }
                 }
+            } catch (SQLException e) {
+                System.out.println("\n| Erro ao conectar com o MySql |\n");
             }
-         catch (SQLException e) {
-            System.out.println("\n| Erro ao conectar com o MySql |\n");
-        }
 
-        if (mdado.getUsop() >= 70.0) {
-            try {
-                System.out.println(mdado.getUsop());
-                String txtErro = "Uso do processador está em " + mdado.getUsop() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";
-                File file = new File("hardware.txt");
+            if (mdado.getUsop() >= 70.0) {
+                try {
+                    System.out.println(mdado.getUsop());
+                    String txtErro = "Uso do processador está em " + mdado.getUsop() + "% "
+                            + mdado.getData() + " " + mdado.getHora() + "\n";
+                    File file = new File("hardware.txt");
 
-                if (!file.exists()) {
-                    file.createNewFile();
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                    bufferWritter.write(txtErro);
+                    bufferWritter.flush();
+                    bufferWritter.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-                FileWriter fileWritter = new FileWriter(file.getPath(), true);
-                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-                bufferWritter.write(txtErro);
-                bufferWritter.flush();
-                bufferWritter.close();
-
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-        }
 
-        if (mdado.porcentoMemoria() >= 70.0) {
-            try {
-                System.out.println(mdado.getUsop());
-                String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";
-                File file = new File("hardware.txt");
+            if (mdado.porcentoMemoria() >= 70.0) {
+                try {
+                    System.out.println(mdado.getUsop());
+                    String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "% "
+                            + mdado.getData() + " " + mdado.getHora() + "\n";
+                    File file = new File("hardware.txt");
 
-                if (!file.exists()) {
-                    file.createNewFile();
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                    bufferWritter.write(txtErro);
+                    bufferWritter.flush();
+                    bufferWritter.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-                FileWriter fileWritter = new FileWriter(file.getPath(), true);
-                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-                bufferWritter.write(txtErro);
-                bufferWritter.flush();
-                bufferWritter.close();
-
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-        }
 
-    }
-    catch (ClassNotFoundException | SQLException ex
-
-    
-        ) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        }
     }//GEN-LAST:event_mostrarTudoActionPerformed
 
-public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -178,31 +177,66 @@ public static void main(String args[]) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MostrarDado.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        /* Create and display the form */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
 
-catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MostrarDado.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        /* Create and display the form */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
 
-catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MostrarDado.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MostrarDado.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
@@ -212,7 +246,6 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton mostrarTudo;

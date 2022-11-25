@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.monitoramento;
 
 import com.github.britooo.looca.api.core.Looca;
@@ -13,10 +9,6 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Aluno
- */
 public class DiscoTask extends TimerTask {
 
     private SqlCommands comandos;
@@ -26,21 +18,19 @@ public class DiscoTask extends TimerTask {
         this.comandos = new SqlCommands();
         this.looca = new Looca();
     }
-    
+
     @Override
     public void run() {
-        System.out.println("Executou!!! disco"); 
-        
+        System.out.println("Executou!!! disco");
+
         Integer quantidadeDeDiscos = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
-        
-      
-             try {
+
+        try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
             Statement stm = con.createStatement();
 
-       
-        try {
+            try {
                 for (int i = 0; i < quantidadeDeDiscos; i++) {
                     stm.execute(comandos.insertDisco(i));
                     System.out.println("insert");
@@ -51,14 +41,9 @@ public class DiscoTask extends TimerTask {
                     System.out.println("update");
                 }
             }
-           
-                } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(DadoTask.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
-            
 
-    } 
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DadoTask.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-
+    }
+}
