@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.awt.Image;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Token extends javax.swing.JFrame {
 
@@ -31,10 +34,10 @@ public class Token extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jLabel1 = new javax.swing.JLabel();
         TokenInserido = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         botaoToken = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         outputLogin = new javax.swing.JLabel();
 
         jMenu1.setText("File");
@@ -46,15 +49,12 @@ public class Token extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/HardSystems.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, 62));
-
         TokenInserido.setBackground(new java.awt.Color(222, 222, 222));
         TokenInserido.setFont(new java.awt.Font("Gadugi", 0, 15)); // NOI18N
         TokenInserido.setActionCommand("<Not Set>");
         TokenInserido.setAlignmentX(0.0F);
         TokenInserido.setAlignmentY(0.0F);
-        TokenInserido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(151, 101, 37), 3));
+        TokenInserido.setBorder(null);
         TokenInserido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TokenInseridoActionPerformed(evt);
@@ -63,21 +63,19 @@ public class Token extends javax.swing.JFrame {
         getContentPane().add(TokenInserido, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 316, 32));
 
         jLabel2.setBackground(new java.awt.Color(151, 101, 37));
-        jLabel2.setFont(new java.awt.Font("Gadugi", 1, 15)); // NOI18N
-        jLabel2.setForeground(java.awt.Color.white);
+        jLabel2.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Insira o Token da Máquina:");
-        jLabel2.setOpaque(true);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 230, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 400, 30));
 
-        botaoToken.setBackground(new java.awt.Color(66, 45, 16));
+        botaoToken.setBackground(new java.awt.Color(238, 238, 238));
         botaoToken.setFont(new java.awt.Font("Gadugi", 1, 15)); // NOI18N
-        botaoToken.setForeground(java.awt.Color.white);
+        botaoToken.setForeground(new java.awt.Color(0, 96, 255));
         botaoToken.setIcon(new javax.swing.ImageIcon(getClass().getResource("/verify.png"))); // NOI18N
         botaoToken.setText("Verificar");
         botaoToken.setAlignmentY(0.0F);
-        botaoToken.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(131, 88, 32))); // NOI18N
-        botaoToken.setBorderPainted(false);
+        botaoToken.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 96, 255)));
         botaoToken.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoToken.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         botaoToken.setDefaultCapable(false);
@@ -91,10 +89,15 @@ public class Token extends javax.swing.JFrame {
                 botaoTokenActionPerformed(evt);
             }
         });
-        getContentPane().add(botaoToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 121, 40));
+        getContentPane().add(botaoToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 121, 40));
 
-        outputLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgroundImage.png"))); // NOI18N
-        outputLogin.setText("jLabel1");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/HardSystemsBlueLogo.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 400, 40));
+
+        outputLogin.setBackground(new java.awt.Color(238, 238, 238));
+        outputLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 96, 255)));
+        outputLogin.setOpaque(true);
         getContentPane().add(outputLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 270));
 
         pack();
@@ -106,49 +109,70 @@ public class Token extends javax.swing.JFrame {
 
     private void botaoTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoTokenActionPerformed
         // TODO add your handling code here: String emailUsuario = textLogin.getText();
-
+        DbDado dbMostrarDado = new DbDado();
         String token = TokenInserido.getText();
-        Database database = new Database();
+        SqlCommands sql = new SqlCommands();
+
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
-            Statement stm = con.createStatement();
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:"
+                    + "1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
 
-            ResultSet rs = stm.executeQuery(
-                    "select idDesktop from Desktop where idDesktop = '" + " " + token + "'");
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql.selectDesktop(token));
 
             if (rs.next()) {
                 dispose();
                 MostrarDado page = new MostrarDado();
                 page.show();
-                String sqlInsert = "";
-                StringBuilder sb = new StringBuilder();
 
-                sb.append("SELECT * FROM Hardware where fkDesktop = ' ").append(token).append("';");
-                ResultSet verificarHardware = stm.executeQuery(sb.toString());
+                ResultSet verificarHardware = stm.executeQuery(sql.selectHardware(token));
 
-                if (!verificarHardware.next()) {
-                    sqlInsert
-                            = "INSERT INTO Hardware(idHardware ,nomeProcessador, "
-                            + "fabricante, frequencia, memoriaTotal, qntDisco, fkDesktop)  VALUES ('"
-                            + database.getIdMaquina() + "','" + database.getNomeProcessador() + "','"
-                            + database.getFabricante() + "','" + database.getFrequencia() + "','"
-                            + database.getMemoriaTotal() + "','" + database.getQntDisco() + "','" + " " + token + "')";
-                } else {
-                    sb.append("UPDATE Hardware SET");
-                    sb.append(" nomeProcessador = '").append(database.getNomeProcessador()).append("'");
-                    sb.append(", fabricante = '").append(database.getFabricante()).append("'");
-                    sb.append(", frequencia = ").append(database.getFrequencia());
-                    sb.append(", memoriaTotal = ").append(database.getMemoriaTotal());
-                    sb.append(", qntDisco = ").append(database.getQntDisco());
-                    sb.append(" WHERE fkDesktop = ' ").append(token).append("';");
+                String sqlInsert = verificarHardware.next() ? sql.updateHardware(token) : sql.insertHardware(token);
 
-                    sqlInsert = sb.toString();
-                }
                 stm.execute(sqlInsert);
+
+                try {
+                    DatabaseMySql db = new DatabaseMySql();
+                    try {
+                        db.inserirDados();
+                    } catch (Exception e) {
+                    }
+                    try {
+                        db.insertHardware(token);
+                    } catch (Exception ex) {
+                        try {
+                            try {
+                                db.updateHardware(token);
+                            } catch (Exception e) {
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.out.println("\n| Erro ao conectar com o MySql |\n");
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Token Inválido!");
                 TokenInserido.setText("");
+
+                try {
+                    String txtErro = "Token Inválido! " + dbMostrarDado.getData() + " " + dbMostrarDado.getHora() + "\n";
+                    File file = new File("autenticacao.txt");
+
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                    bufferWritter.write(txtErro);
+                    bufferWritter.flush();
+                    bufferWritter.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
             con.close();
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {

@@ -2,17 +2,29 @@ package com.mycompany.monitoramento;
 
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.Disco;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class MostrarDado extends javax.swing.JFrame {
 
+    private Timer timer;
+
     public MostrarDado() {
         initComponents();
+        this.timer = new Timer("Insert Disco");
+        this.timer.schedule(new DiscoTask(), 1_000, 20_000);
+
+        this.timer = new Timer("Insert Dados");
+        this.timer.schedule(new DadoTask(), 1_000, 20_000);
     }
 
     @SuppressWarnings("unchecked")
@@ -60,33 +72,94 @@ public class MostrarDado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mostrarTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTudoActionPerformed
-        DbMostrarDado mdado = new DbMostrarDado();
+        DbDado mdado = new DbDado();
         Looca looca = new Looca();
+        SqlCommands sql = new SqlCommands();
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:"
+                    + "1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
             Statement stm = con.createStatement();
 
-            Integer qtdDiscoJ = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
-            for (int i = 0; i < qtdDiscoJ; i++) {
+            Integer qntDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
 
-                Disco disco = looca.getGrupoDeDiscos().getDiscos().get(i);
-                String modelo = disco.getModelo();
-                String serial = disco.getSerial();
-                Long bytesEscrita = disco.getBytesDeEscritas() / 1000;
-                Long bytesLeitura = disco.getBytesDeLeitura() / 1000;
-                Long escritas = disco.getEscritas() / 1000;
-                Long leituras = disco.getLeituras() / 1000;
-                Long tamanho = disco.getTamanho() / 1000000000;
-                Long tamanhoAtualFila = disco.getTamanhoAtualDaFila();
-                Long tempoTransferencia = disco.getTempoDeTransferencia() / 1000;
-                System.out.println(serial);
-                stm.execute("INSERT INTO Disco (modelo, serial, bytesEscrita, bytesLeitura, escritas, leituras, tamanho, tamanhoAtualFila, tempoTransferencia,  fkHardware) "
-                        + "VALUES ('" + modelo + "','" + serial + "','" + bytesEscrita + "','" + bytesLeitura + "','" + escritas + "','" + leituras + "','" + tamanho + "','" + tamanhoAtualFila + "','" + tempoTransferencia + "','" + mdado.getIdMaquina() + "')");
+            try {
+                for (int i = 0; i < qntDisco; i++) {
+                    stm.execute(sql.insertDisco(i));
+                }
+            } catch (Exception ex) {
+                for (int i = 0; i < qntDisco; i++) {
+                    stm.execute(sql.updateDisco(i));
+                }
             }
-            stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware) "
-                    + "VALUES ('" + mdado.getEmUso() + "','" + mdado.getUsop() + "','" + mdado.getIdMaquina() + "')");
+            stm.execute(sql.insertDados());
+
+            try {
+                DatabaseMySql db = new DatabaseMySql();
+                try {
+                    db.inserirDados();
+                } catch (Exception e) {
+                }
+                try {
+                    for (int i = 0; i < mdado.getQtdDisco(); i++) {
+                        db.inserirDisco(i);
+                    }
+                } catch (Exception ex) {
+                    try {
+                        for (int i = 0; i < mdado.getQtdDisco(); i++) {
+                            db.updateDisco(i);
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println("\n| Erro ao conectar com o MySql |\n");
+            }
+
+            if (mdado.getUsop() >= 70.0) {
+                try {
+                    System.out.println(mdado.getUsop());
+                    String txtErro = "Uso do processador está em " + mdado.getUsop() + "% "
+                            + mdado.getData() + " " + mdado.getHora() + "\n";
+                    File file = new File("hardware.txt");
+
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                    bufferWritter.write(txtErro);
+                    bufferWritter.flush();
+                    bufferWritter.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (mdado.porcentoMemoria() >= 70.0) {
+                try {
+                    System.out.println(mdado.getUsop());
+                    String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "% "
+                            + mdado.getData() + " " + mdado.getHora() + "\n";
+                    File file = new File("hardware.txt");
+
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                    bufferWritter.write(txtErro);
+                    bufferWritter.flush();
+                    bufferWritter.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,13 +190,62 @@ public class MostrarDado extends javax.swing.JFrame {
         }
         //</editor-fold>
         /* Create and display the form */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        /* Create and display the form */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MostrarDado().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton mostrarTudo;
