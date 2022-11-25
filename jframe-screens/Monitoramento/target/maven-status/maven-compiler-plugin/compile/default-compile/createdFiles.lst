@@ -1,13 +1,16 @@
 com\mycompany\monitoramento\Login.class
+com\mycompany\monitoramento\DatabaseMySql.class
 com\mycompany\monitoramento\DbHardware.class
 com\mycompany\monitoramento\Login$4.class
 com\mycompany\monitoramento\Token$1.class
 com\mycompany\monitoramento\Login$2.class
+com\mycompany\monitoramento\DiscoTask.class
 com\mycompany\monitoramento\Login$1.class
 com\mycompany\monitoramento\DbDisco.class
 com\mycompany\monitoramento\MostrarDado$1.class
 com\mycompany\monitoramento\Token$2.class
 com\mycompany\monitoramento\Token.class
+com\mycompany\monitoramento\DadoTask.class
 com\mycompany\monitoramento\Login$3.class
 com\mycompany\monitoramento\Monitoramento.class
 com\mycompany\monitoramento\SqlCommands.class

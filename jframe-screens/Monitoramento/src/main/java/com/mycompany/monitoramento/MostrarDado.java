@@ -15,19 +15,17 @@ import java.util.logging.Logger;
 
 public class MostrarDado extends javax.swing.JFrame {
 
-    
-private Timer timer;
-    
-    
+    private Timer timer;
 
     public MostrarDado() {
         initComponents();
         this.timer = new Timer("Insert Disco");
         this.timer.schedule(new DiscoTask(), 1_000, 20_000);
-        
+
         this.timer = new Timer("Insert Dados");
         this.timer.schedule(new DadoTask(), 1_000, 20_000);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -83,66 +81,93 @@ private Timer timer;
             Statement stm = con.createStatement();
 
             Integer qntDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
-            
+
             try {
                 for (int i = 0; i < qntDisco; i++) {
                     stm.execute(sql.insertDisco(i));
                 }
             } catch (Exception ex) {
                 for (int i = 0; i < qntDisco; i++) {
-                     stm.execute(sql.updateDisco(i));
+                    stm.execute(sql.updateDisco(i));
                 }
             }
             stm.execute(sql.insertDados());
 
-            if (mdado.getUsop() >= 70.0) {
+            try {
+                DatabaseMySql db = new DatabaseMySql();
                 try {
-                    System.out.println(mdado.getUsop());
-                    String txtErro = "Uso do processador está em " + mdado.getUsop() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";
-                    File file = new File("hardware.txt");
-
-                    if (!file.exists()) {
-                        file.createNewFile();
-                    }
-
-                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
-                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-                    bufferWritter.write(txtErro);
-                    bufferWritter.flush();
-                    bufferWritter.close();
-
+                    db.inserirDados();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                }
+                try {
+                    for (int i = 0; i < mdado.getQtdDisco(); i++) {
+                        db.inserirDisco(i);
+                    }
+                } catch (Exception ex) {
+                    try {
+                        for (int i = 0; i < mdado.getQtdDisco(); i++) {
+                            db.updateDisco(i);
+                        }
+                    } catch (Exception e) {
+                    }
                 }
             }
-
-            if (mdado.porcentoMemoria() >= 70.0) {
-                try {
-                    System.out.println(mdado.getUsop());
-                    String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";
-                    File file = new File("hardware.txt");
-
-                    if (!file.exists()) {
-                        file.createNewFile();
-                    }
-
-                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
-                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-                    bufferWritter.write(txtErro);
-                    bufferWritter.flush();
-                    bufferWritter.close();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
+         catch (SQLException e) {
+            System.out.println("\n| Erro ao conectar com o MySql |\n");
         }
+
+        if (mdado.getUsop() >= 70.0) {
+            try {
+                System.out.println(mdado.getUsop());
+                String txtErro = "Uso do processador está em " + mdado.getUsop() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";
+                File file = new File("hardware.txt");
+
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                bufferWritter.write(txtErro);
+                bufferWritter.flush();
+                bufferWritter.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (mdado.porcentoMemoria() >= 70.0) {
+            try {
+                System.out.println(mdado.getUsop());
+                String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "% " + mdado.getData() + " " + mdado.getHora() + "\n";
+                File file = new File("hardware.txt");
+
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                bufferWritter.write(txtErro);
+                bufferWritter.flush();
+                bufferWritter.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    catch (ClassNotFoundException | SQLException ex
+
+    
+        ) {
+            Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_mostrarTudoActionPerformed
 
-    public static void main(String args[]) {
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -153,16 +178,31 @@ private Timer timer;
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MostrarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MostrarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MostrarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MostrarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MostrarDado.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MostrarDado.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */

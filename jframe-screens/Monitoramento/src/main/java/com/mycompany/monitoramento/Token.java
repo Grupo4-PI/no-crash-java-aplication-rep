@@ -112,12 +112,12 @@ public class Token extends javax.swing.JFrame {
         DbDado dbMostrarDado = new DbDado();
         String token = TokenInserido.getText();
         SqlCommands sql = new SqlCommands();
-        
+
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:"
                     + "1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
-            
+
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql.selectDesktop(token));
 
@@ -127,10 +127,24 @@ public class Token extends javax.swing.JFrame {
                 page.show();
 
                 ResultSet verificarHardware = stm.executeQuery(sql.selectHardware(token));
-                
+
                 String sqlInsert = verificarHardware.next() ? sql.updateHardware(token) : sql.insertHardware(token);
-                
+
                 stm.execute(sqlInsert);
+
+                try {
+                    DatabaseMySql db = new DatabaseMySql();
+                    try {
+                        db.insertHardware(token);
+                    } catch (Exception ex) {
+                        try {
+                            db.updateHardware(token);
+                        } catch (Exception e) {
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.out.println("\n| Erro ao conectar com o MySql |\n");
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Token Inválido!");
                 TokenInserido.setText("");
@@ -138,11 +152,11 @@ public class Token extends javax.swing.JFrame {
                 try {
                     String txtErro = "Token Inválido! " + dbMostrarDado.getData() + " " + dbMostrarDado.getHora() + "\n";
                     File file = new File("autenticacao.txt");
-                    
+
                     if (!file.exists()) {
                         file.createNewFile();
                     }
-     
+
                     FileWriter fileWritter = new FileWriter(file.getPath(), true);
                     BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
                     bufferWritter.write(txtErro);
