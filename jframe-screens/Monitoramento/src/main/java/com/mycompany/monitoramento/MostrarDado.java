@@ -42,7 +42,6 @@ public class MostrarDado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        mostrarTudo.setBackground(new java.awt.Color(255, 255, 255));
         mostrarTudo.setFont(new java.awt.Font("Gadugi", 1, 15)); // NOI18N
         mostrarTudo.setForeground(new java.awt.Color(0, 96, 255));
         mostrarTudo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/log.png"))); // NOI18N
@@ -55,6 +54,7 @@ public class MostrarDado extends javax.swing.JFrame {
         mostrarTudo.setFocusPainted(false);
         mostrarTudo.setFocusable(false);
         mostrarTudo.setIconTextGap(12);
+        mostrarTudo.setOpaque(false);
         mostrarTudo.setRequestFocusEnabled(false);
         mostrarTudo.setVerifyInputWhenFocusTarget(false);
         mostrarTudo.addActionListener(new java.awt.event.ActionListener() {
