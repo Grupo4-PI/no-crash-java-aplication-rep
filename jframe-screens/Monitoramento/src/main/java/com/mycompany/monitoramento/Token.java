@@ -38,6 +38,7 @@ public class Token extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         botaoToken = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         outputLogin = new javax.swing.JLabel();
 
         jMenu1.setText("File");
@@ -60,22 +61,22 @@ public class Token extends javax.swing.JFrame {
                 TokenInseridoActionPerformed(evt);
             }
         });
-        getContentPane().add(TokenInserido, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 316, 32));
+        getContentPane().add(TokenInserido, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 316, 20));
 
         jLabel2.setBackground(new java.awt.Color(151, 101, 37));
         jLabel2.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Insira o Token da Máquina:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 400, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 400, 30));
 
-        botaoToken.setBackground(new java.awt.Color(238, 238, 238));
+        botaoToken.setBackground(new java.awt.Color(255, 255, 255));
         botaoToken.setFont(new java.awt.Font("Gadugi", 1, 15)); // NOI18N
         botaoToken.setForeground(new java.awt.Color(0, 96, 255));
         botaoToken.setIcon(new javax.swing.ImageIcon(getClass().getResource("/verify.png"))); // NOI18N
         botaoToken.setText("Verificar");
         botaoToken.setAlignmentY(0.0F);
-        botaoToken.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 96, 255)));
+        botaoToken.setBorder(null);
         botaoToken.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botaoToken.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         botaoToken.setDefaultCapable(false);
@@ -89,13 +90,16 @@ public class Token extends javax.swing.JFrame {
                 botaoTokenActionPerformed(evt);
             }
         });
-        getContentPane().add(botaoToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 121, 40));
+        getContentPane().add(botaoToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 121, 40));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/HardSystemsBlueLogo.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 400, 40));
 
-        outputLogin.setBackground(new java.awt.Color(238, 238, 238));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnLog.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, 60));
+
+        outputLogin.setBackground(new java.awt.Color(255, 255, 255));
         outputLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 96, 255)));
         outputLogin.setOpaque(true);
         getContentPane().add(outputLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 270));
@@ -225,6 +229,7 @@ public class Token extends javax.swing.JFrame {
     private javax.swing.JButton botaoToken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
