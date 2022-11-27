@@ -40,14 +40,14 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         passwordLogin = new javax.swing.JPasswordField();
-        btnLogin = new javax.swing.JButton();
         textLogin = new javax.swing.JTextField();
         outputLogin = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -90,29 +90,6 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(passwordLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 260, 20));
 
-        btnLogin.setBackground(new java.awt.Color(66, 45, 16));
-        btnLogin.setFont(new java.awt.Font("Gadugi", 1, 15)); // NOI18N
-        btnLogin.setForeground(java.awt.Color.white);
-        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnLogin.png"))); // NOI18N
-        btnLogin.setAlignmentY(0.0F);
-        btnLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(131, 88, 32))); // NOI18N
-        btnLogin.setBorderPainted(false);
-        btnLogin.setContentAreaFilled(false);
-        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogin.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        btnLogin.setDefaultCapable(false);
-        btnLogin.setFocusPainted(false);
-        btnLogin.setFocusable(false);
-        btnLogin.setIconTextGap(12);
-        btnLogin.setRequestFocusEnabled(false);
-        btnLogin.setVerifyInputWhenFocusTarget(false);
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 220, 50));
-
         textLogin.setBackground(new java.awt.Color(238, 238, 238));
         textLogin.setFont(new java.awt.Font("Gadugi", 0, 15)); // NOI18N
         textLogin.setForeground(new java.awt.Color(153, 153, 153));
@@ -150,17 +127,42 @@ public class Login extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/notebook.png"))); // NOI18N
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 420, -1));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 96, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Sing In");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 380, 30));
+
+        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogin.setFont(new java.awt.Font("Gadugi", 1, 15)); // NOI18N
+        btnLogin.setForeground(java.awt.Color.white);
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnLogin.png"))); // NOI18N
+        btnLogin.setAlignmentY(0.0F);
+        btnLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(131, 88, 32))); // NOI18N
+        btnLogin.setBorderPainted(false);
+        btnLogin.setContentAreaFilled(false);
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        btnLogin.setDefaultCapable(false);
+        btnLogin.setEnabled(false);
+        btnLogin.setFocusPainted(false);
+        btnLogin.setFocusable(false);
+        btnLogin.setIconTextGap(12);
+        btnLogin.setOpaque(true);
+        btnLogin.setRequestFocusEnabled(false);
+        btnLogin.setVerifyInputWhenFocusTarget(false);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 220, 50));
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText(" em tempo real.");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 380, 20));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 96, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Sing In");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 200, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 96, 255));
