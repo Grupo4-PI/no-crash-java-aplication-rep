@@ -10,24 +10,25 @@ public class DatabaseMySql {
     private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSourceSql);
     private final SqlCommands sql = new SqlCommands();
 // ec2 config
-//    public DatabaseMySql() throws SQLException  {       ;
-//        dataSourceSql.setDriverClassName(
-//                "com.mysql.cj.jdbc.Driver");
-//        dataSourceSql.setUrl(
-//                "jdbc:mysql://172.17.0.1:3306/nocrash");
-//        dataSourceSql.setUsername("root");
-//        dataSourceSql.setPassword("urubu100");
-//    }
+    public DatabaseMySql() throws SQLException  {       ;
+       dataSourceSql.setDriverClassName(
+              "com.mysql.cj.jdbc.Driver");
+       dataSourceSql.setUrl(
+               "jdbc:mysql://172.17.0.1:3306/nocrash");
+       dataSourceSql.setUsername("root");
+       dataSourceSql.setPassword("urubu100");
+   }
         
-//local config
+/*local config
+        
     public DatabaseMySql() throws SQLException {
         dataSourceSql.setDriverClassName(
                 "com.mysql.cj.jdbc.Driver");
         dataSourceSql.setUrl(
                 "jdbc:mysql://localhost:3306/nocrash");
         dataSourceSql.setUsername("root");
-        dataSourceSql.setPassword("urubu100");
-    }
+        dataSourceSql.setPassword("041096");
+    }*/
     
     public void insertHardware(String token) {
          jdbcTemplate.update(sql.insertHardware(token));

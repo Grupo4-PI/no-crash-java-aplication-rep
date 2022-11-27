@@ -22,9 +22,11 @@ public class MostrarDado extends javax.swing.JFrame {
         initComponents();
         this.timer = new Timer("Insert Disco");
         this.timer.schedule(new DiscoTask(), 1_000, 20_000);
+        this.timer.schedule(new DiscoTaskMySql(), 1_000, 20_000);
 
         this.timer = new Timer("Insert Dados");
         this.timer.schedule(new DadoTask(), 1_000, 20_000);
+        this.timer.schedule(new DadoTaskMySql(), 1_000, 20_000);
     }
 
     @SuppressWarnings("unchecked")
@@ -86,48 +88,10 @@ public class MostrarDado extends javax.swing.JFrame {
     private void mostrarTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTudoActionPerformed
         DbDado mdado = new DbDado();
         Looca looca = new Looca();
+        mdado.setUsop(90.0);
         SqlCommands sql = new SqlCommands();
 
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:"
-                    + "1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
-            Statement stm = con.createStatement();
-
-            Integer qntDisco = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
-
-            try {
-                for (int i = 0; i < qntDisco; i++) {
-                    stm.execute(sql.insertDisco(i));
-                }
-            } catch (Exception ex) {
-                for (int i = 0; i < qntDisco; i++) {
-                    stm.execute(sql.updateDisco(i));
-                }
-            }
-            stm.execute(sql.insertDados());
-
-            try {
-                DatabaseMySql db = new DatabaseMySql();
-                try {
-                    db.inserirDados();
-                } catch (Exception e) {
-                }
-                try {
-                    for (int i = 0; i < mdado.getQtdDisco(); i++) {
-                        db.inserirDisco(i);
-                    }
-                } catch (Exception ex) {
-                    try {
-                        for (int i = 0; i < mdado.getQtdDisco(); i++) {
-                            db.updateDisco(i);
-                        }
-                    } catch (Exception e) {
-                    }
-                }
-            } catch (SQLException e) {
-                System.out.println("\n| Erro ao conectar com o MySql |\n");
-            }
+       
 
             if (mdado.getUsop() >= 70.0) {
                 try {
@@ -173,9 +137,8 @@ public class MostrarDado extends javax.swing.JFrame {
                 }
             }
 
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(MostrarDado.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+
     }//GEN-LAST:event_mostrarTudoActionPerformed
 
     public static void main(String args[]) {
