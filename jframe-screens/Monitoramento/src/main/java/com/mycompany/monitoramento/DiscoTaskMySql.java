@@ -58,6 +58,7 @@ public class DiscoTaskMySql extends TimerTask{
                             System.out.println("update local");
                         }
                     } catch (Exception e) {
+                        System.out.println("erro no disco local");
                     }
             }
 

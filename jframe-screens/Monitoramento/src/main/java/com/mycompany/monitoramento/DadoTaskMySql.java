@@ -35,7 +35,7 @@ public class DadoTaskMySql extends TimerTask {
                 db.inserirDados();
                  System.out.println("Inseriu dados local");
             } catch (Exception e) {
-                System.out.println("\n| Erro ao Inserir os dados no bd mysql |"
+                System.out.println("\n| Erro ao Inserir os dados no bd mysql dados|"
                         + "- Verifique a conexão\n");
             }
         } catch (SQLException ex) {
