@@ -142,7 +142,7 @@ public class Login extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Sing In in NoCrash");
+        jLabel12.setText("Sign In in NoCrash");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 420, 30));
 
         jLabel9.setBackground(new java.awt.Color(238, 238, 238));
@@ -180,7 +180,6 @@ public class Login extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(0, 96, 255));
         jButton1.setText("Sign In");
         jButton1.setBorder(null);
-        jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
