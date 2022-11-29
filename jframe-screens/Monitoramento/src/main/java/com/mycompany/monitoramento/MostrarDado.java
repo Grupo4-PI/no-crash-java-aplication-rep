@@ -22,12 +22,12 @@ public class MostrarDado extends javax.swing.JFrame {
         
         initComponents();
         this.timer = new Timer("Insert Disco");
-        this.timer.schedule(new DiscoTask(), 1_000, 20_000);
-        this.timer.schedule(new DiscoTaskMySql(), 1_000, 20_000);
+        this.timer.schedule(new DiscoTask(), 1_000, 10_000);
+        this.timer.schedule(new DiscoTaskMySql(), 1_000, 10_000);
 
         this.timer = new Timer("Insert Dados");
-        this.timer.schedule(new DadoTask(), 1_000, 20_000);
-        this.timer.schedule(new DadoTaskMySql(), 1_000, 20_000);
+        this.timer.schedule(new DadoTask(), 1_000, 10_000);
+        this.timer.schedule(new DadoTaskMySql(), 1_000, 10_000);
         
     }
 
