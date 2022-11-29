@@ -19,6 +19,7 @@ public class DbDado {
 
     public Long getEmUso() {
         return emUso;
+        
     }
 
     public void setEmUso(Long emUso) {
@@ -34,6 +35,8 @@ public class DbDado {
     }
 
     public Double getUsop() {
+        
+        System.out.println(usop);
         return usop;
     }
 

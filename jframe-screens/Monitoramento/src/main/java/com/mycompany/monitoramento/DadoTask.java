@@ -21,12 +21,14 @@ public class DadoTask extends TimerTask {
     @Override
     public void run() {
         try {
+            DbDado mdado = new DbDado();
             System.out.println("executou dado");
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
             Statement stm = con.createStatement();
-
-            stm.execute(comandos.insertDados());
+            System.out.println(mdado.getEmUso());
+            stm.execute("INSERT INTO Dado (memoriaDisponivel , usoProcessador, fkHardware) "
+                + "VALUES ('" + mdado.getEmUso() + "','" + mdado.getUsop() + "','" + mdado.getIdMaquina() + "');");
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DadoTask.class.getName()).log(Level.SEVERE, null, ex);

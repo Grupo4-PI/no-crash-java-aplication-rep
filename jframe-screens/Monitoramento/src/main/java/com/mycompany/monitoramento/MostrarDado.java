@@ -19,6 +19,7 @@ public class MostrarDado extends javax.swing.JFrame {
     private Timer timer;
 
     public MostrarDado() {
+        
         initComponents();
         this.timer = new Timer("Insert Disco");
         this.timer.schedule(new DiscoTask(), 1_000, 20_000);
@@ -27,6 +28,7 @@ public class MostrarDado extends javax.swing.JFrame {
         this.timer = new Timer("Insert Dados");
         this.timer.schedule(new DadoTask(), 1_000, 20_000);
         this.timer.schedule(new DadoTaskMySql(), 1_000, 20_000);
+        
     }
 
     @SuppressWarnings("unchecked")
