@@ -127,7 +127,7 @@ public class Token extends javax.swing.JFrame {
 
             if (rs.next()) {
                 dispose();
-                MostrarDado page = new MostrarDado();
+                MostrarDado page = new MostrarDado(token);
                 page.show();
 
                 ResultSet verificarHardware = stm.executeQuery(sql.selectHardware(token));

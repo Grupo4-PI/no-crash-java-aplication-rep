@@ -17,18 +17,33 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class MostrarDado extends javax.swing.JFrame {
 
     private Timer timer;
+    private String token = "";
 
-    public MostrarDado() {
-        
+    public MostrarDado(String token) {
+
         initComponents();
         this.timer = new Timer("Insert Disco");
-        this.timer.schedule(new DiscoTask(), 1_000, 10_000);
-        this.timer.schedule(new DiscoTaskMySql(), 1_000, 10_000);
+        this.timer.schedule(new DiscoTask(token), 1_000, 10_000);
+        this.timer.schedule(new DiscoTaskMySql(token), 1_000, 10_000);
 
         this.timer = new Timer("Insert Dados");
-        this.timer.schedule(new DadoTask(), 1_000, 10_000);
-        this.timer.schedule(new DadoTaskMySql(), 1_000, 10_000);
-        
+        this.timer.schedule(new DadoTask(token), 1_000, 10_000);
+        this.timer.schedule(new DadoTaskMySql(token), 1_000, 10_000);
+        this.token = token;
+        System.out.println("estou na tela de mostrar dado e o token é o " + token);
+    }
+
+    public MostrarDado() {
+
+        initComponents();
+        this.timer = new Timer("Insert Disco");
+        this.timer.schedule(new DiscoTask(token), 1_000, 10_000);
+        this.timer.schedule(new DiscoTaskMySql(token), 1_000, 10_000);
+
+        this.timer = new Timer("Insert Dados");
+        this.timer.schedule(new DadoTask(token), 1_000, 10_000);
+        this.timer.schedule(new DadoTaskMySql(token), 1_000, 10_000);
+        System.out.println("estou na tela de mostrar dado e o token é o " + token);
     }
 
     @SuppressWarnings("unchecked")
@@ -93,53 +108,50 @@ public class MostrarDado extends javax.swing.JFrame {
         mdado.setUsop(90.0);
         SqlCommands sql = new SqlCommands();
 
-       
+        if (mdado.getUsop() >= 70.0) {
+            try {
+                System.out.println(mdado.getUsop());
+                String txtErro = "Uso do processador está em " + mdado.getUsop() + "% "
+                        + mdado.getData() + " " + mdado.getHora() + "\n";
+                File file = new File("hardware.txt");
 
-            if (mdado.getUsop() >= 70.0) {
-                try {
-                    System.out.println(mdado.getUsop());
-                    String txtErro = "Uso do processador está em " + mdado.getUsop() + "% "
-                            + mdado.getData() + " " + mdado.getHora() + "\n";
-                    File file = new File("hardware.txt");
-
-                    if (!file.exists()) {
-                        file.createNewFile();
-                    }
-
-                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
-                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-                    bufferWritter.write(txtErro);
-                    bufferWritter.flush();
-                    bufferWritter.close();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (!file.exists()) {
+                    file.createNewFile();
                 }
+
+                FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                bufferWritter.write(txtErro);
+                bufferWritter.flush();
+                bufferWritter.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+        }
 
-            if (mdado.porcentoMemoria() >= 70.0) {
-                try {
-                    System.out.println(mdado.getUsop());
-                    String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "% "
-                            + mdado.getData() + " " + mdado.getHora() + "\n";
-                    File file = new File("hardware.txt");
+        if (mdado.porcentoMemoria() >= 70.0) {
+            try {
+                System.out.println(mdado.getUsop());
+                String txtErro = "Uso da memória está em " + mdado.porcentoMemoria() + "% "
+                        + mdado.getData() + " " + mdado.getHora() + "\n";
+                File file = new File("hardware.txt");
 
-                    if (!file.exists()) {
-                        file.createNewFile();
-                    }
-
-                    FileWriter fileWritter = new FileWriter(file.getPath(), true);
-                    BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-                    bufferWritter.write(txtErro);
-                    bufferWritter.flush();
-                    bufferWritter.close();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (!file.exists()) {
+                    file.createNewFile();
                 }
-            }
 
-        
+                FileWriter fileWritter = new FileWriter(file.getPath(), true);
+                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                bufferWritter.write(txtErro);
+                bufferWritter.flush();
+                bufferWritter.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }//GEN-LAST:event_mostrarTudoActionPerformed
 

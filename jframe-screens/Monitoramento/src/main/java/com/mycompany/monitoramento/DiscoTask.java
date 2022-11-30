@@ -13,31 +13,33 @@ public class DiscoTask extends TimerTask {
 
     private SqlCommands comandos;
     private Looca looca;
+    private String token = "";
 
-    public DiscoTask() {
+    public DiscoTask(String token) {
         this.comandos = new SqlCommands();
         this.looca = new Looca();
+        this.token = token;
     }
 
     @Override
     public void run() {
-        System.out.println("Executou!!! disco");
 
         Integer quantidadeDeDiscos = looca.getGrupoDeDiscos().getQuantidadeDeDiscos();
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://nocrash.database.windows.net:"
+                    + "1433;database=NoCrash;encrypt=true;trustServerCertificate=false", "nocrash", "#Gfgrupo4");
             Statement stm = con.createStatement();
 
             try {
                 for (int i = 0; i < quantidadeDeDiscos; i++) {
-                    stm.execute(comandos.insertDisco(i));
+                    stm.execute(comandos.insertDisco(i, token));
                     System.out.println("insert");
                 }
             } catch (SQLException ex) {
                 for (int i = 0; i < quantidadeDeDiscos; i++) {
-                    stm.execute(comandos.updateDisco(i));
+                    stm.execute(comandos.updateDisco(i, token));
                     System.out.println("update");
                 }
             }

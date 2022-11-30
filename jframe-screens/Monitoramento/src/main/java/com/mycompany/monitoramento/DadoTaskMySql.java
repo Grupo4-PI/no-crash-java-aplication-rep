@@ -1,29 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.monitoramento;
 
-/**
- *
- * @author guh_a
- */
 import java.sql.SQLException;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author guh_a
- */
 public class DadoTaskMySql extends TimerTask {
 
     private SqlCommands comandos;
+    private String token = "";
 
-    public DadoTaskMySql() {
+    public DadoTaskMySql(String token) {
         this.comandos = new SqlCommands();
-
+        this.token = token;
     }
 
     @Override
@@ -31,9 +20,8 @@ public class DadoTaskMySql extends TimerTask {
         try {
             DatabaseMySql db = new DatabaseMySql();
             try {
-               
-                db.inserirDados();
-                 System.out.println("Inseriu dados local");
+                db.inserirDados(token);
+                System.out.println("Inseriu dados local");
             } catch (Exception e) {
                 System.out.println("\n| Erro ao Inserir os dados no bd mysql dados|"
                         + "- Verifique a conexão\n");
